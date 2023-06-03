@@ -2,7 +2,6 @@
 package main
 
 import (
-	"bufio"
 	"encoding/gob"
 	"encoding/json"
 	"flag"
@@ -12,7 +11,9 @@ import (
 	"os"
 	"os/signal"
 	"reflect"
-	"strconv"
+	"io/ioutil"
+	"path/filepath"
+	"time"
 	"strings"
 
 	"github.com/huichen/wukong/engine"
@@ -27,7 +28,6 @@ const (
 var (
 	searcher      = engine.Engine{}
 	wbs           = map[uint64]Weibo{}
-	weiboData     = flag.String("weibo_data", "../../testdata/weibo_data.txt", "微博数据文件")
 	dictFile      = flag.String("dict_file", "../../data/dictionary.txt", "词典文件")
 	stopTokenFile = flag.String("stop_token_file", "../../data/stop_tokens.txt", "停用词文件")
 	staticFolder  = flag.String("static_folder", "static", "静态文件目录")
@@ -41,29 +41,95 @@ type Weibo struct {
 	Text         string `json:"text"`
 }
 
+type Data struct {
+	User User `json:"user"`
+	WeiboData []WeiboData `json:"weibo"`
+}
+type User struct {
+	ID string `json:"id"`
+	ScreenName string `json:"screen_name"`
+	Gender string `json:"gender"`
+	Birthday string `json:"birthday"`
+	Location string `json:"location"`
+	Education string `json:"education"`
+	Company string `json:"company"`
+	RegistrationTime string `json:"registration_time"`
+	Sunshine string `json:"sunshine"`
+	StatusesCount int `json:"statuses_count"`
+	FollowersCount int `json:"followers_count"`
+	FollowCount int `json:"follow_count"`
+	Description string `json:"description"`
+	ProfileURL string `json:"profile_url"`
+	ProfileImageURL string `json:"profile_image_url"`
+	AvatarHd string `json:"avatar_hd"`
+	Urank int `json:"urank"`
+	Mbrank int `json:"mbrank"`
+	Verified bool `json:"verified"`
+	VerifiedType int `json:"verified_type"`
+	VerifiedReason string `json:"verified_reason"`
+}
+type WeiboData struct {
+	UserID uint64 `json:"user_id"`
+	ScreenName string `json:"screen_name"`
+	ID uint64 `json:"id"`
+	Bid string `json:"bid"`
+	Text string `json:"text"`
+	ArticleURL string `json:"article_url"`
+	Pics string `json:"pics"`
+	VideoURL string `json:"video_url"`
+	Location string `json:"location"`
+	CreatedAt string `json:"created_at"`
+	Source string `json:"source"`
+	AttitudesCount int `json:"attitudes_count"`
+	CommentsCount int `json:"comments_count"`
+	RepostsCount int `json:"reposts_count"`
+	Topics string `json:"topics"`
+	AtUsers string `json:"at_users"`
+	FullCreatedAt string `json:"full_created_at"`
+}
+
 /*******************************************************************************
     索引
 *******************************************************************************/
 func indexWeibo() {
 	// 读入微博数据
-	file, err := os.Open(*weiboData)
+	layout := "2006-01-02 15:04:05"
+	files, err := ioutil.ReadDir("../../testdata/weibo-crawler/weibo")
 	if err != nil {
 		log.Fatal(err)
 	}
-	defer file.Close()
-	scanner := bufio.NewScanner(file)
-	for scanner.Scan() {
-		data := strings.Split(scanner.Text(), "||||")
-		if len(data) != 10 {
+	for _, file := range files {
+		if file.IsDir() {
+			continue // 忽略文件夹
+		}
+		filePath := filepath.Join("../../testdata/weibo-crawler/weibo", file.Name())
+		log.Println(file.Name())
+		fileContent, err := ioutil.ReadFile(filePath)
+		if err != nil {
+			log.Printf("无法读取文件 %s: %v\n", filePath, err)
 			continue
 		}
-		wb := Weibo{}
-		wb.Id, _ = strconv.ParseUint(data[0], 10, 64)
-		wb.Timestamp, _ = strconv.ParseUint(data[1], 10, 64)
-		wb.UserName = data[3]
-		wb.RepostsCount, _ = strconv.ParseUint(data[4], 10, 64)
-		wb.Text = data[9]
-		wbs[wb.Id] = wb
+
+		var data Data
+		err = json.Unmarshal(fileContent, &data)
+		if err != nil {
+			log.Printf("无法解析文件 %s: %v\n", filePath, err)
+			continue
+		}
+		for _, w := range data.WeiboData {
+			wb := Weibo{}
+			wb.Id = w.ID
+			t, err := time.Parse(layout, w.FullCreatedAt)
+			if err != nil {
+				log.Println("无法解析日期:", err)
+				continue
+			}
+			wb.Timestamp = uint64(t.Unix())
+			wb.UserName = w.ScreenName
+			wb.RepostsCount = uint64(w.RepostsCount)
+			wb.Text = w.Text
+			wbs[wb.Id] = wb
+		}
 	}
 
 	log.Print("添加索引")
