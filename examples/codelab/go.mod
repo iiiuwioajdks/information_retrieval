@@ -2,9 +2,7 @@ module main.go
 
 go 1.19
 
-require (
-	github.com/iiiuwioajdks/information_retrieval  v1.1.1-laimuxi-homework
-)
+require github.com/iiiuwioajdks/information_retrieval v1.2.1-laimuxi-homework
 
 require (
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect
@@ -19,6 +17,7 @@ require (
 	github.com/edsrzf/mmap-go v1.0.0 // indirect
 	github.com/huichen/murmur v0.0.0-20130808212358-e0489551cf51 // indirect
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76 // indirect
+	github.com/huichen/wukong v0.0.0-20210824074240-ecbd39fa0b56 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
 	golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf // indirect
 )
