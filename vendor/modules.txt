@@ -26,10 +26,12 @@ github.com/cznic/sortutil
 # github.com/cznic/zappy v0.0.0-20181122101859-ca47d358d4b1
 ## explicit
 github.com/cznic/zappy
-# github.com/edsrzf/mmap-go v1.0.0
+# github.com/edsrzf/mmap-go v1.1.0
 ## explicit
 github.com/edsrzf/mmap-go
 # github.com/golang/snappy v0.0.4
+## explicit
+# github.com/huichen/gobo v0.0.0-20130808212258-a483eda6582e
 ## explicit
 # github.com/huichen/murmur v0.0.0-20130808212358-e0489551cf51
 ## explicit
@@ -37,10 +39,10 @@ github.com/huichen/murmur
 # github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76
 ## explicit
 github.com/huichen/sego
-# github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0
+# github.com/remyoudompheng/bigfft v0.0.0-20230129092748-24d4a6f8daec
 ## explicit
 github.com/remyoudompheng/bigfft
-# golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf
+# golang.org/x/sys v0.8.0
 ## explicit
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix
