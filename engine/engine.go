@@ -12,10 +12,10 @@ import (
 
 	"github.com/huichen/murmur"
 	"github.com/huichen/sego"
-	"github.com/huichen/wukong/core"
-	"github.com/huichen/wukong/storage"
-	"github.com/huichen/wukong/types"
-	"github.com/huichen/wukong/utils"
+	"github.com/iiiuwioajdks/information_retrieval/core"
+	"github.com/iiiuwioajdks/information_retrieval/storage"
+	"github.com/iiiuwioajdks/information_retrieval/types"
+	"github.com/iiiuwioajdks/information_retrieval/utils"
 )
 
 const (

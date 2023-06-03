@@ -1,7 +1,7 @@
 package storage
 
 import (
-	"github.com/huichen/wukong/utils"
+	"github.com/iiiuwioajdks/information_retrieval/utils"
 	"os"
 	"testing"
 )

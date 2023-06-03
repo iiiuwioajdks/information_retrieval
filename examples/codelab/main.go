@@ -16,8 +16,8 @@ import (
 	"time"
 	"strings"
 
-	"github.com/huichen/wukong/engine"
-	"github.com/huichen/wukong/types"
+	"github.com/iiiuwioajdks/information_retrieval/engine"
+	"github.com/iiiuwioajdks/information_retrieval/types"
 )
 
 const (

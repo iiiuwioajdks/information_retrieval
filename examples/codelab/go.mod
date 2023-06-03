@@ -2,7 +2,7 @@ module main.go
 
 go 1.19
 
-require github.com/huichen/wukong v0.0.0-20210824074240-ecbd39fa0b56
+require github.com/iiiuwioajdks/information_retrieval v1.0.1-laimuxi-homework
 
 require (
 	github.com/adamzy/cedar-go v0.0.0-20170805034717-80a9c64b256d // indirect

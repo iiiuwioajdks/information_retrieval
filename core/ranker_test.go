@@ -1,8 +1,8 @@
 package core
 
 import (
-	"github.com/huichen/wukong/types"
-	"github.com/huichen/wukong/utils"
+	"github.com/iiiuwioajdks/information_retrieval/types"
+	"github.com/iiiuwioajdks/information_retrieval/utils"
 	"reflect"
 	"testing"
 )
