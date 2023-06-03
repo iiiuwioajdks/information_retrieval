@@ -1,4 +1,4 @@
-module github.com/huichen/wukong
+module github.com/iiiuwioajdks/information_retrieval
 
 go 1.16
 
