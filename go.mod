@@ -1,4 +1,4 @@
-module wukong.go
+module github.com/iiiuwioajdks/information_retrieval
 
 go 1.19
 
@@ -7,7 +7,7 @@ require (
 	github.com/cznic/kv v0.0.0-20181122101858-e9cdcade440e
 	github.com/huichen/murmur v0.0.0-20130808212358-e0489551cf51
 	github.com/huichen/sego v0.0.0-20210824061530-c87651ea5c76
-	github.com/iiiuwioajdks/information_retrieval v1.0.1-laimuxi-homework
+	github.com/iiiuwioajdks/information_retrieval  v1.1.1-laimuxi-homework
 )
 
 require (
