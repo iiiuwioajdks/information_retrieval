@@ -1,7 +1,7 @@
 package types
 
 import (
-	"github.com/huichen/wukong/utils"
+	"github.com/iiiuwioajdks/information_retrieval/utils"
 )
 
 type SearchResponse struct {

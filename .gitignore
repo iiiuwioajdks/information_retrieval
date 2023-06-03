@@ -5,3 +5,4 @@
 
 # Ignore weibo data file
 testdata/weibo_data.txt
+vendor/*
